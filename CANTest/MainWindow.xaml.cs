@@ -34,7 +34,7 @@ namespace CANTest
             System.Diagnostics.Process.GetCurrentProcess().MaxWorkingSet = (IntPtr)750000;
             biDate.EditValue = DateTime.Now;
             //skinList.ItemsSource = Theme.Themes;
-            TabGroup.ItemsSource = tabSource;
+            TabGroup.ItemsSource = tabSource;  
         }
 
         /* 皮肤选择
