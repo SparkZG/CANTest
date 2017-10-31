@@ -1,0 +1,293 @@
+﻿<dx:DXWindow
+        x:Class="CANTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CANTest"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"     
+        dx:ThemeManager.ThemeName="MetropolisLight"
+        Title="bq-CANTest" Height="700" Width="1000" SizeToContent="Manual"         
+    WindowStartupLocation="CenterScreen" Loaded="MainWindow_Loaded" Closed="MainWindow_Closed" Icon="CAN.ico">
+
+    <Window.Resources>
+        <Style x:Key="myGroupBoxStyle" TargetType="dxlc:GroupBox">
+            <Setter Property="MaximizeElementVisibility" Value="Visible"/>
+            <Setter Property="MinimizeElementVisibility" Value="Visible"/>
+        </Style>
+
+        <DataTemplate x:Key="rowIndicatorContentTemplate">
+            <StackPanel VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding Path=RowHandle.Value}"
+                           TextAlignment="Center"
+                           Foreground="LightGray"/>
+            </StackPanel>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="TabControlTemplate">
+            <DockPanel>
+                <dxb:ToolBarControl DockPanel.Dock="Top" Caption="operation" AllowCustomizationMenu="False" AllowHide="False" AllowQuickCustomization="False" AllowRename="False" FontFamily="Tahoma">
+                    <dxb:BarButtonItem IsEnabled="{Binding Flag, Converter={StaticResource rc}, UpdateSourceTrigger=PropertyChanged}" 
+                                       Command="local:Commands.OperateDevice" CommandParameter="Start"
+                                       Content="{DynamicResource coStart}" Glyph="{dx:DXImage Image=Next_16x16.png}"
+                                       Alignment="Default" BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem IsEnabled="{Binding Flag, UpdateSourceTrigger=PropertyChanged}"
+                                       Command="local:Commands.OperateDevice" CommandParameter="Pause"
+                                       Content="{DynamicResource coPause}"
+                                       Glyph="{dx:DXImage Image=BORules_16x16.png}"
+                                       Alignment="Default" BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Command="local:Commands.OperateDevice" CommandParameter="Close"
+                                       Content="{DynamicResource biClose}" 
+                                       Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                                       Alignment="Default" BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Content="{DynamicResource coClear}"
+                                       Command="local:Commands.DealData" CommandParameter="clear"
+                                       Glyph="{dx:DXImage Image=Clear_16x16.png}" 
+                                       Alignment="Default" 
+                                       BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Content="{DynamicResource coSave}"
+                                       Command="local:Commands.DealData" CommandParameter="export"
+                                       Glyph="{dx:DXImage Image=Save_16x16.png}"
+                                       Alignment="Default"
+                                       BarItemDisplayMode="ContentAndGlyph"/>
+                </dxb:ToolBarControl>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <dxlc:GroupBox Header="{DynamicResource coOperation}" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Style="{StaticResource myGroupBoxStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Text="{DynamicResource coFrame}"
+                           Style="{StaticResource style_TextBlock}"/>
+                                <TextBlock Text="：0x"
+                           Style="{StaticResource style_TextBlock}"/>
+                            </StackPanel>
+                            <StackPanel  HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{DynamicResource coTimes}"
+                           Style="{StaticResource style_TextBlock}"/>
+                                <TextBlock Text="："
+                           Style="{StaticResource style_TextBlock}"/>
+                            </StackPanel>
+                            <StackPanel  HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Text="{DynamicResource coSendData}"
+                           Style="{StaticResource style_TextBlock}"/>
+                                <TextBlock Text="："
+                           Style="{StaticResource style_TextBlock}"/>
+                            </StackPanel>
+                            <StackPanel  HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{DynamicResource coInterval}"
+                           Style="{StaticResource style_TextBlock}"/>
+                                <TextBlock Text="："
+                           Style="{StaticResource style_TextBlock}"/>
+                            </StackPanel>
+
+
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="1"
+                                          IsEnabled="{Binding SendOutFlag}"
+                                          Style="{StaticResource style_TextEdit}"
+                                          Width="120" Text="{Binding SendID}" MaskType="RegEx" Mask="[0-9a-fA-F]{1,8}"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" 
+                                          IsEnabled="{Binding SendOutFlag}"
+                                          Style="{StaticResource style_TextEdit}" 
+                                          Width="120" Text="{Binding SendTime}" MaskType="RegEx" Mask="[1-9][0-9]{0,7}"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="3"
+                                          IsEnabled="{Binding SendOutFlag}"
+                                          Style="{StaticResource style_TextEdit}"
+                                          Width="200" Text="{Binding SendData}" MaskType="RegEx" Mask="([0-9a-fA-F]{2} ){0,8}"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="3"
+                                          IsEnabled="{Binding SendOutFlag}"
+                                          Style="{StaticResource style_TextEdit}"
+                                          Width="100" Text="{Binding SendInterval}"  MaskType="RegEx" Mask="[1-9][0-9]{0,7}"/>
+
+                            <dx:SimpleButton Content="{DynamicResource coSend}"
+                                             Command="local:Commands.DealData" CommandParameter="send"                                             
+                                             Grid.Row="0" Grid.Column="4" 
+                                             Style="{StaticResource style_SimpleButton}"
+                                             Width="80">
+                                <dx:SimpleButton.IsEnabled>
+                                    <MultiBinding Converter="{StaticResource ftc}" ConverterParameter="send" Mode="OneWay">
+                                        <Binding Path="Flag"></Binding>
+                                        <Binding Path="SendOutFlag"></Binding>
+                                    </MultiBinding>
+                                </dx:SimpleButton.IsEnabled>
+                            </dx:SimpleButton>
+                            <dx:SimpleButton Content="{DynamicResource coStop}"
+                                             Grid.Row="1" Grid.Column="4" 
+                                             Command="local:Commands.DealData" CommandParameter="stop"
+                                             Style="{StaticResource style_SimpleButton}"
+                                             Width="80">
+
+                                <dx:SimpleButton.IsEnabled>
+                                    <MultiBinding Converter="{StaticResource ftc}" ConverterParameter="stop" Mode="OneWay">
+                                        <Binding Path="Flag"></Binding>
+                                        <Binding Path="SendOutFlag"></Binding>
+                                    </MultiBinding>
+                                </dx:SimpleButton.IsEnabled>
+                            </dx:SimpleButton>
+
+                        </Grid>
+                    </dxlc:GroupBox>
+
+                    <dxg:GridControl ItemsSource="{Binding CANData}" Grid.Row="0" AutoGenerateColumns="None" ShowBorder="False" SnapsToDevicePixels="True">
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="{DynamicResource coDirection}" FieldName="direction" Width="30" HorizontalHeaderContentAlignment="Center"/>
+                            <dxg:GridColumn Header="{DynamicResource coTime}" FieldName="time" Width="60" HorizontalHeaderContentAlignment="Center"/>
+                            <dxg:GridColumn Header="{DynamicResource scType}" FieldName="type" Width="30" HorizontalHeaderContentAlignment="Center"/>
+                            <dxg:GridColumn Header="{DynamicResource coFrame}" FieldName="id" Width="50" HorizontalHeaderContentAlignment="Center"/>
+                            <dxg:GridColumn Header="{DynamicResource coSendData}" FieldName="data" HorizontalHeaderContentAlignment="Center"/>
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView 
+                                AllowPerPixelScrolling="True" 
+                                AllowScrollAnimation="True"
+                                           NavigationStyle="Row"
+                                           RowIndicatorContentTemplate="{StaticResource rowIndicatorContentTemplate}"
+                                           ShowFocusedRectangle="False"          
+                                           UseEvenRowBackground="True"
+                                           AllowEditing="False"
+                                           IndicatorWidth="50"
+                                           FocusedRowHandle="{Binding TotalNum, Converter={StaticResource rtc}}"
+                                           ShowGroupPanel="False"
+                                           AllowGrouping="False"
+                                           ShowVerticalLines="False"
+                                           ShowHorizontalLines="False"
+                                           ShowDataNavigator="False"
+                                           ShowIndicator="True"
+                                           AllowResizing="True"
+                                           AllowSorting="False"										    
+                                           AllowFilterEditor="True"                                              
+                                           AllowColumnFiltering="True"
+                                           AllowMoveColumnToDropArea="False" 
+                                           AllowScrollToFocusedRow="True"
+                                           AutoWidth="True" 
+                                           IsColumnMenuEnabled="False"/>
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </Grid>
+
+            </DockPanel>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="HeaderTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="Chocolate" Text="{Binding ConnObject}"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text=" "></TextBlock>
+
+                <TextBlock Foreground="Chocolate" Text="{DynamicResource scDevice}"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text=":"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text="{Binding DevIndex}"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text=" "></TextBlock>
+
+                <TextBlock Foreground="Chocolate" Text="{DynamicResource scDevChannel}"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text=":"></TextBlock>
+                <TextBlock Foreground="Chocolate" Text="{Binding DevChannel}"></TextBlock>
+            </StackPanel>
+
+        </DataTemplate>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="local:Commands.ChooseLanguage" CanExecute="ChooseLanguage_CanExecute" Executed="ChooseLanguage_Executed"/>
+        <CommandBinding Command="local:Commands.ChooseDevice" CanExecute="ChooseDevice_CanExecute" Executed="ChooseDevice_Executed"/>
+        <CommandBinding Command="local:Commands.OperateDevice" CanExecute="OperateDevice_CanExecute" Executed="OperateDevice_Executed"/>
+        <CommandBinding Command="local:Commands.DealData" CanExecute="DealData_CanExecute" Executed="DealData_Executed"/>
+        <CommandBinding Command="local:Commands.ExitApp" CanExecute="ExitApp_CanExecute" Executed="ExitApp_Executed"/>
+        <CommandBinding Command="local:Commands.About" CanExecute="About_CanExecute" Executed="About_Executed"/>
+    </Window.CommandBindings>
+    <Grid>
+        <DockPanel>
+            <dxb:MainMenuControl DockPanel.Dock="Top" AllowCustomizationMenu="False" AllowRename="False">
+                <dxb:BarSubItem Content="{DynamicResource biFile}">
+                    <dxb:BarButtonItem Content="{DynamicResource biSelectDevice}"
+                                       Glyph="{dx:DXImage Image=GroupFieldCollection_16x16.png}"
+                                       LargeGlyph="{dx:DXImage Image=GroupFieldCollection_32x32.png}" Command="local:Commands.ChooseDevice"/>
+                    <dxb:BarButtonItem Content="{DynamicResource biClose}" 
+                                       Command="local:Commands.ExitApp"
+                                       Glyph="{dx:DXImageGrayscale Image=Close_16x16.png}"
+                                       
+                                       LargeGlyph="{dx:DXImageGrayscale Image=Close_32x32.png}"/>
+                </dxb:BarSubItem>
+                <dxb:BarSubItem  Content="{DynamicResource biSetting}">
+                    <dxb:BarSubItem Content="{DynamicResource biLanguage}"
+                                    Glyph="{dx:DXImage Image=Language_16x16.png}"
+                                    LargeGlyph="{dx:DXImage Image=Language_32x32.png}">
+                        <dxb:BarButtonItem Content="English"
+                                           Command="local:Commands.ChooseLanguage" CommandParameter="en"/>
+                        <dxb:BarButtonItem x:Name="biChinese" Content="中文" 
+                                           Command="local:Commands.ChooseLanguage" CommandParameter="zh"/>
+                    </dxb:BarSubItem>
+                    
+                    <!--皮肤-->
+                    <!--<dxb:BarSubItem Content="{DynamicResource biSkin}" 
+                                    Glyph="{dx:DXImage Image=BOPosition_16x16.png}"
+                                    LargeGlyph="{dx:DXImage Image=BOPosition_32x32.png}">
+                        <dxb:BarEditItem x:Name="biSkinChoose" EditWidth="150" EditValueChanged="biSkinChoose_EditValueChanged">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="skinList"/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                    </dxb:BarSubItem>-->
+                    
+                </dxb:BarSubItem>
+                <dxb:BarSubItem Content="{DynamicResource biHelp}">
+                    <dxb:BarButtonItem  Content="{DynamicResource biAbout}" Command="local:Commands.About">                        
+                    </dxb:BarButtonItem>
+                </dxb:BarSubItem>
+            </dxb:MainMenuControl>
+            <dxb:StatusBarControl Caption="StatusBar" DockPanel.Dock="Bottom"
+                                  ShowSizeGrip="True" AllowCustomizationMenu="False"
+                                  DataContext="{Binding ElementName=TabGroup, Path=SelectedItem}"
+                                  AllowRename="False">
+                <dxb:BarStaticItem Content="{DynamicResource biSendFrames}" ShowBorder="False"/>
+
+                <dxb:BarStaticItem Content=":"></dxb:BarStaticItem>
+                <dxb:BarStaticItem Content="{Binding SendNum}"></dxb:BarStaticItem>
+                
+                <dxb:BarStaticItem Content="{DynamicResource biReceive}" ShowBorder="False"/>
+                <dxb:BarStaticItem Content=":"></dxb:BarStaticItem>
+                <dxb:BarStaticItem Content="{Binding ReceiveNum}"></dxb:BarStaticItem>
+
+                <dxb:BarStaticItem Alignment="Far" Content="{DynamicResource biConn}" ShowBorder="False"/>
+                <dxb:BarStaticItem Alignment="Far" Content=":"></dxb:BarStaticItem>
+                <dxb:BarStaticItem Alignment="Far" Content="{Binding ElementName=TabGroup, Path=Items.Count, Mode=OneWay}"></dxb:BarStaticItem>
+
+                <dxb:BarEditItem x:Name="biDate" IsReadOnly="True" Alignment="Far" EditWidth="85">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:DateEditSettings/>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+            </dxb:StatusBarControl>
+
+
+            <dx:DXTabControl x:Name="TabGroup"
+                             ItemHeaderTemplate="{StaticResource HeaderTemplate}" 
+                             ItemTemplate="{StaticResource TabControlTemplate}" 
+                             TabHiding="TabGroup_TabHiding">
+                <dx:DXTabControl.View>
+                    <dx:TabControlScrollView HideButtonShowMode="InActiveTabAndHeaderArea" 
+                                             ShowHeaderMenu="True" 
+                                             ShowHiddenTabItemsInHeaderMenu="True" 
+                                             ShowVisibleTabItemsInHeaderMenu="False"/>
+                </dx:DXTabControl.View>
+            </dx:DXTabControl>
+        </DockPanel>
+
+    </Grid>
+</dx:DXWindow>

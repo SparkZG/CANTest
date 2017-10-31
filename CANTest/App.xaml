@@ -1,0 +1,40 @@
+﻿<Application x:Class="CANTest.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:local="clr-namespace:CANTest"
+             StartupUri="MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName" Exit="Application_Exit">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <ResourceDictionary Source="Language\StringResource.zh-CN.xaml" />
+                <ResourceDictionary Source="Language\StringResource.en-US.xaml" />
+                <ResourceDictionary Source="ControlXaml\ComboBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="TextBlock" x:Key="style_TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            </Style>
+            <Style TargetType="dx:SimpleButton" x:Key="style_SimpleButton">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            </Style>
+            <Style TargetType="dxe:TextEdit" x:Key="style_TextEdit">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            </Style>
+            <!--converts-->
+            <local:ReverseConverter x:Key="rc"></local:ReverseConverter>
+            <local:HexToStringConverter x:Key="hsc"></local:HexToStringConverter>
+            <local:ByteToIntConverter x:Key="bic"></local:ByteToIntConverter>
+            <local:Providier x:Key="Providier"></local:Providier>
+            <local:TypeToIndexConverter x:Key="ttc"></local:TypeToIndexConverter>
+            <local:TypeToChannelConverter x:Key="tcc"></local:TypeToChannelConverter>
+            <local:FlagToIsEnableConverter x:Key="ftc"></local:FlagToIsEnableConverter>
+            <local:RowToFocusConverter x:Key="rtc"></local:RowToFocusConverter>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

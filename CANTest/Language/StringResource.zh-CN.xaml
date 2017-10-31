@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="biFile">文件</sys:String>
+    <sys:String x:Key="biHelp">帮助</sys:String>
+    <sys:String x:Key="biAbout">关于</sys:String>
+    <sys:String x:Key="biName">产品名称：</sys:String>
+    <sys:String x:Key="biCopyRight">版权所有:</sys:String>
+    <sys:String x:Key="biWeb">公司网址:</sys:String>
+    <sys:String x:Key="biVersion">版本号:</sys:String>
+    <sys:String x:Key="biSelectDevice">选择设备</sys:String>
+    <sys:String x:Key="biClose">关闭</sys:String>
+    <sys:String x:Key="biSetting">设置</sys:String>
+    <sys:String x:Key="biLanguage">语言</sys:String>
+    <sys:String x:Key="biSendFrames">发送帧数</sys:String>
+    <sys:String x:Key="biReceive">接收帧数</sys:String>
+    <sys:String x:Key="biConn">当前连接数</sys:String>
+    <sys:String x:Key="biSkin">皮肤</sys:String>
+    
+    
+    <sys:String x:Key="coStart">启动</sys:String>
+    <sys:String x:Key="coPause">暂停</sys:String>
+    <sys:String x:Key="coStop">停止</sys:String>
+    <sys:String x:Key="coClear">清空</sys:String>
+    <sys:String x:Key="coSave">保存</sys:String>
+    <sys:String x:Key="coOperation">基本操作</sys:String>
+    <sys:String x:Key="coFrame">帧ID(HEX)</sys:String>
+    <sys:String x:Key="coTimes">发送次数</sys:String>
+    <sys:String x:Key="coSendData">数据(HEX)</sys:String>
+    <sys:String x:Key="coInterval">发送间隔(ms)</sys:String>
+    <sys:String x:Key="coSend">发送</sys:String>
+    <sys:String x:Key="coDirection">方向</sys:String>
+    <sys:String x:Key="coTime">时间</sys:String>
+
+
+    <sys:String x:Key="scDevice">设备</sys:String>
+    <sys:String x:Key="scDevicePara">设备参数</sys:String>
+    <sys:String x:Key="scInitialPara">初始化参数</sys:String>
+    <sys:String x:Key="scType">类型</sys:String>
+    <sys:String x:Key="scDevIndex">索引</sys:String>
+    <sys:String x:Key="scDevChannel">通道</sys:String>
+    <sys:String x:Key="scTimer0">定时器0</sys:String>
+    <sys:String x:Key="scTimer1">定时器1</sys:String>
+    <sys:String x:Key="scBaudrate">波特率</sys:String>
+    <sys:String x:Key="scPattern">工作模式</sys:String>
+    <sys:String x:Key="scCheckCode">验收码</sys:String>
+    <sys:String x:Key="scShieldCode">屏蔽码</sys:String>
+    <sys:String x:Key="scSelect">请选择</sys:String>
+    <sys:String x:Key="scOK">确定</sys:String>
+    <sys:String x:Key="scCanel">取消</sys:String>
+    
+    
+    <sys:String x:Key="teNormal">正常</sys:String>
+    <sys:String x:Key="teListenonly">只听</sys:String>
+    <sys:String x:Key="tePrompt">提示</sys:String>
+    <sys:String x:Key="tePromptText1">此类型CAN盒没有多余的设备或者通道可以打开！</sys:String>
+    <sys:String x:Key="tePromptText2">打开CAN盒失败！</sys:String>
+    <sys:String x:Key="tePromptText3">发送失败！</sys:String>
+    <sys:String x:Key="teReceive">接收</sys:String>
+    <sys:String x:Key="teStandardFrame">标准帧</sys:String>
+    <sys:String x:Key="teExtendedFrame">扩展帧</sys:String>
+
+    <sys:String x:Key="teNewVersion">新版本可用</sys:String>
+    <sys:String x:Key="teReOk">确定更新新版本？</sys:String>
+</ResourceDictionary>

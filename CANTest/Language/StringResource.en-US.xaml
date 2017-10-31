@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="biFile">File</sys:String>
+    <sys:String x:Key="biHelp">Help</sys:String>
+    <sys:String x:Key="biAbout">About</sys:String>
+    <sys:String x:Key="biName">Product Name：</sys:String>
+    <sys:String x:Key="biCopyRight">CopyRight:</sys:String>
+    <sys:String x:Key="biWeb">Web:</sys:String>
+    <sys:String x:Key="biVersion">Version:</sys:String>
+    <sys:String x:Key="biSelectDevice">Choose Device</sys:String>
+    <sys:String x:Key="biClose">Close</sys:String>
+    <sys:String x:Key="biSetting">Setting</sys:String>
+    <sys:String x:Key="biLanguage">Language</sys:String>
+    <sys:String x:Key="biSendFrames">Send frames</sys:String>
+    <sys:String x:Key="biReceive">Frames received</sys:String>
+    <sys:String x:Key="biConn">Current connections</sys:String>
+    <sys:String x:Key="biSkin">Skin</sys:String>
+    
+    
+    
+    <sys:String x:Key="coStart">Start</sys:String>
+    <sys:String x:Key="coPause">Pause</sys:String>
+    <sys:String x:Key="coStop">Stop</sys:String>
+    <sys:String x:Key="coClear">Clear</sys:String>
+    <sys:String x:Key="coSave">Save</sys:String>
+    <sys:String x:Key="coOperation">Basic Operation</sys:String>
+    <sys:String x:Key="coFrame">Frame ID(HEX)</sys:String>
+    <sys:String x:Key="coTimes">Send Times</sys:String>
+    <sys:String x:Key="coSendData">Data(HEX)</sys:String>
+    <sys:String x:Key="coInterval">Send Interval</sys:String>
+    <sys:String x:Key="coSend">Send</sys:String>
+    <sys:String x:Key="coDirection">Direction</sys:String>
+    <sys:String x:Key="coTime">Time</sys:String>
+
+
+    <sys:String x:Key="scDevice">Device</sys:String>
+    <sys:String x:Key="scDevicePara">Device Parameter</sys:String>
+    <sys:String x:Key="scInitialPara">Initialization Parameter</sys:String>
+    <sys:String x:Key="scType">Type</sys:String>
+    <sys:String x:Key="scDevIndex">CANIndex</sys:String>
+    <sys:String x:Key="scDevChannel">CANChannel</sys:String>
+    <sys:String x:Key="scTimer0">Timer0</sys:String>
+    <sys:String x:Key="scTimer1">Timer1</sys:String>
+    <sys:String x:Key="scBaudrate">Baud Rate</sys:String>
+    <sys:String x:Key="scPattern">Working Pattern</sys:String>
+    <sys:String x:Key="scCheckCode">Check Code</sys:String>
+    <sys:String x:Key="scShieldCode">Shield Code</sys:String>
+    <sys:String x:Key="scSelect">Please Select Device</sys:String>
+    <sys:String x:Key="scOK">OK</sys:String>
+    <sys:String x:Key="scCanel">Canel</sys:String>
+    
+    
+    <sys:String x:Key="teNormal">Normal</sys:String>
+    <sys:String x:Key="teListenonly">Listen Only</sys:String>
+    <sys:String x:Key="tePrompt">Prompt</sys:String>
+    <sys:String x:Key="tePromptText1">This type of CAN box has no extra devices or channels to open！</sys:String>
+    <sys:String x:Key="tePromptText2">Failed to open CAN！</sys:String>
+    <sys:String x:Key="tePromptText3">Failed to Send！</sys:String>
+    <sys:String x:Key="teReceive">Receive</sys:String>
+    <sys:String x:Key="teStandardFrame">Standard Frame</sys:String>
+    <sys:String x:Key="teExtendedFrame">Extended Frame</sys:String>
+
+    <sys:String x:Key="teNewVersion">New version</sys:String>
+    <sys:String x:Key="teReOk">Update to the new version?</sys:String>
+</ResourceDictionary>
